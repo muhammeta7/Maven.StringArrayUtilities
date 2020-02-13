@@ -61,7 +61,7 @@ public class StringArrayUtils {
         String[] reverseArray = new String[array.length];
         int newIndex = 0;
         for( int i= array.length-1; i >= 0; i--) {
-            reverseArray[newIndex]= array[i];
+            reverseArray[newIndex] = array[i];
             newIndex++;
         }
         return reverseArray;
@@ -119,6 +119,8 @@ public class StringArrayUtils {
         return counter;
     }
 
+
+
     /**
      * @param array         array of String objects
      * @param valueToRemove value to remove from array
@@ -166,8 +168,24 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        int counter = 0;
+        int arrayLength = array.length;
+        int iterator = 0;
+        for (int i = array.length-1; i > 0; i--) {
+            if (array[i] != null && array[i].charAt(0) == array[i-1].charAt(0) ) {
+                array[i-1] += array[i];
+                array[i] = null;
+                counter++;
+            }
+        }
+        String[] packConsecutive = new String[arrayLength-counter];
+        for (int i = 0; i < array.length ; i++) {
+            if(array[i] != null) {
+                packConsecutive[iterator] = array[i];
+                iterator++;
+            }
+        }
+        return packConsecutive;
     }
-
 
 }
