@@ -1,5 +1,7 @@
 package com.zipcodewilmington;
 
+import java.util.Arrays;
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -43,7 +45,7 @@ public class StringArrayUtils {
      */ // TODO
     public static boolean contains(String[] array, String value) {
         boolean containsValue =  false;
-        for (String element : array) {
+        for(String element : array) {
             if ( element.equals(value) ) {
                 containsValue = true;
             }
@@ -58,11 +60,10 @@ public class StringArrayUtils {
     public static String[] reverse(String[] array) {
         String[] reverseArray = new String[array.length];
         int newIndex = 0;
-        for ( int i= array.length-1; i >= 0; i--) {
+        for( int i= array.length-1; i >= 0; i--) {
             reverseArray[newIndex]= array[i];
             newIndex++;
         }
-
         return reverseArray;
     }
 
@@ -72,7 +73,7 @@ public class StringArrayUtils {
      */ // TODO
     public static boolean isPalindromic(String[] array) {
         int j = array.length-1;
-        for (int i = 0; i < array.length/2 ; i++) {
+        for(int i = 0; i < array.length/2 ; i++) {
             if( !array[i].equals(array[j])) {
                 return false;
             }
@@ -86,9 +87,21 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        //String alphabet = "abcdefghijklmnopqrstuvwxyz";
-
-        return false;
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        String newString = String.join("", array);
+        int counter = 0;
+        for ( int i = 0; i < alphabet.length() ; i++ ) {
+            //newString.substring(i,i+1);
+            for (int k = 0; k < newString.length(); k++) {
+                //alphabet.substring(k, k+1);
+                //System.out.println(alphabet.substring(k, k+1) + " " + newString.substring(i,i+1));
+                if ( alphabet.substring(i, i+1).equalsIgnoreCase(newString.substring(k,k+1))) {
+                    counter++;
+                    break;
+                }
+            }
+        }
+        return counter == 26;
     }
 
     /**
@@ -98,7 +111,7 @@ public class StringArrayUtils {
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
         int counter = 0;
-        for (int i = 0; i < array.length; i++) {
+        for(int i = 0; i < array.length; i++) {
             if ( array[i].equals(value)) {
                 counter++;
             }
@@ -112,11 +125,10 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        // int n = getNumberOfOccurrences(array,valueToRemove);
         String[] newArray = new String[array.length-1];
         int j = 0;
-        for (int i = 0; i < array.length; i++) {
-            if ( array[i].equals(valueToRemove)) {
+        for(int i = 0; i < array.length; i++) {
+            if(array[i].equals(valueToRemove)) {
                 continue;
             }
             newArray[j] = array[i];
@@ -130,8 +142,23 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-
-        return null;
+        int counter = 0;
+        int arrayLength = array.length;
+        int iterator = 0;
+        for (int i = array.length-1; i > 0; i--) {
+            if (array[i] != null && array[i].equals(array[i-1])) {
+                array[i] = null;
+                counter++;
+            }
+        }
+        String[] duplicatesRemoved = new String[arrayLength-counter];
+        for (int i = 0; i < array.length ; i++) {
+            if(array[i] != null) {
+                duplicatesRemoved[iterator] = array[i];
+                iterator++;
+            }
+        }
+        return duplicatesRemoved;
     }
 
     /**
